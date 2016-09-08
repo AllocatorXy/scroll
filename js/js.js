@@ -5,14 +5,14 @@ window.onload = function ()
 	var aLi = oUl.getElementsByTagName('li');
 	var oBtn = document.getElementById('change');
 	var oBtn2 = document.getElementById('re');
-	var speed = 2;
+	var speed = 4;
 
 	oUl.innerHTML+= oUl.innerHTML; //double the ul
 	oUl.style.width = aLi[0].offsetWidth*aLi.length+'px'; //ul宽度等于所有li的和，这里取任意一个li * li个数
 
 	function scroll(speed) 
-	{
-
+	
+{
 		if (oUl.offsetLeft<-oUl.offsetWidth/2) //向左滚动到一半时重置滚动
 		{
 			oUl.style.left = 0;
@@ -23,6 +23,15 @@ window.onload = function ()
 		}
 
 		oUl.style.left = oUl.offsetLeft+speed+'px';
+
+		oDiv.onmouseover = function () 
+		{
+			clearInterval(timer);		
+		};
+		oDiv.onmouseout = function () 
+		{
+			timer = setInterval(scroll, 30, speed);	
+		};
 
 	}
 
@@ -37,6 +46,15 @@ window.onload = function ()
 			timer = setInterval(reScroll, 30, speed);
 		}
 		oUl.style.left = oUl.offsetLeft+speed+'px';
+
+		oDiv.onmouseover = function () 
+		{
+			clearInterval(timer);		
+		};
+		oDiv.onmouseout = function () 
+		{
+			timer = setInterval(reScroll, 30, speed);	
+		};
 	}
 
 	oBtn2.onclick = function () //来回滚
@@ -52,12 +70,5 @@ window.onload = function ()
 			timer = setInterval(scroll, 30, speed);	
 		};
 
-	oDiv.onmouseover = function () 
-	{
-		clearInterval(timer);		
-	};
-	oDiv.onmouseout = function () 
-	{
-		timer = setInterval(scroll, 30, speed);	
-	};
+
 };
